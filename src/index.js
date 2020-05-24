@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactMarkdown from 'react-markdown';
+import './styles.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export default function MarkdownEditor(){
+  const [markdown, setMarkdown] = useState('');
+
+  const handleChange = e => {
+    setMarkdown(e.target.value);
+  }
+
+  return(
+    <div className="app">
+      <textarea onChange={handleChange} value={markdown}/>
+      <ReactMarkdown className="preview" source={markdown} />
+    </div>
+  );
+
+
+}
+
+ReactDOM.render(<MarkdownEditor />,document.getElementById('root'));
+
